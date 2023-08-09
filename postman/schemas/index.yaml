@@ -1,6 +1,6 @@
 openapi: '3.0.0'
 info:
-  version: '1.0.0'
+  version: '1.0.1'
   title: 'Sample API'
   description: Buy or rent spacecrafts
 
@@ -8,13 +8,13 @@ paths:
   /spacecrafts/{spacecraftId}:
     parameters:
       - name: spacecraftId
-        description: The unique identifier of the spacecraft
+        description: The unique identifier of the spacecraft (aka UUID)
         in: path
         required: true
         schema:
           $ref: '#/components/schemas/SpacecraftId'
     get:
-      summary: Read a spacecraft
+      summary: Read and comprehend and understand a spacecraft
       responses:
         '200':
           description: The spacecraft corresponding to the provided `spacecraftId`
@@ -36,6 +36,12 @@ paths:
                 $ref: '#/components/schemas/Error'
         500:
           description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        503:
+          description: Internal server error
           content:
             application/json:
               schema:
